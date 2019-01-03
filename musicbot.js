@@ -1,10 +1,9 @@
 const Discord = require('discord.js');
-const Http = require('http').createServer().listen(3000);
 const ytdl = require('ytdl-core');
 const YouTube = require('simple-youtube-api');
 
 const client = new Discord.Client({disableEveryone: true});
-const youtube = new YouTube('AIzaSyCYec0lLA5nFravq4w5Y8Udk91rH-TpGH0');
+const youtube = new YouTube(YT);
 
 const queue = new Map();
 
@@ -264,4 +263,4 @@ function shuffle(array) {
   	return array;
 }
 
-client.login('MzUyNDE4MTE3ODc3NzYwMDAy.Dw-Ecw.3BcPgvW4Rq2A8yNcpKhSlom9ycA');
+client.login(TOKEN);
