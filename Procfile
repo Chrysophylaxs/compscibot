@@ -1,1 +1,1 @@
-node musicbot
+release: node musicbot
