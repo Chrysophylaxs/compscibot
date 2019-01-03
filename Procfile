@@ -1,1 +1,1 @@
-release: node musicbot
+worker: node musicbot
