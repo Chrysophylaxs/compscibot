@@ -139,7 +139,7 @@ client.on('message', async msg => {
 		}
 		return msg.channel.send(songqueue);
 	}
-	else if (command === "!repeat") {
+	else if (command === "!repeat" || command === "!r") {
 		if (!serverQueue) return msg.channel.send('There is nothing playing.');
 		if (!args[0]) return msg.channel.send(`The repeat status is **${serverQueue.repeat}**`);
 		if (args[0] != "off" && args[0] != "single" && args[0] != "queue") return msg.channel.send('Invalid argument');
@@ -165,6 +165,46 @@ client.on('message', async msg => {
 	}
 	else if (command === "!help") {
 		msg.channel.send("**Music Commands:       |      Prefix:  `!`\n`Command:     Alias:     Usage:`\n\nAdd music to the queue or start streaming music to the voice channel:\n`play         p          !play https://youtu.be/dQw4w9WgXcQ || !play Never gonna give you up`\n\nSkip the current song:\n`skip         s          !skip || !s`\n\nStop the entire queue:\n`stop                    !stop`\n\nDisplay or set the volume:\n`volume       vol        !volume || !volume [0.1-10]`\n\nDisplay song that is currrently playing:\n`nowplaying   np         !nowplaying || !np`\n\nDisplay the entire queue:\n`queue        q          !queue || !q`\n\nPause current song:\n`pause                   !pause`\n\nResume current song:\n`resume                  !resume`\n\nDisplay or set repeat status:\n`repeat                  !repeat || !repeat [off, single, queue]`\n\nShuffle remaining songs in the queue:\n`shuffle                 !shuffle`**")
+	}
+	else if (command === "!setactivity") {
+		if (!args[0]) return msg.channel.send('Please add the type and the message');
+		if (!args[1]) return msg.channel.send('Please also add a message');
+		let type = args[0]
+		args = args.slice(1);
+		let activity = args.join(" ");
+		
+		switch (type) {
+			case "watching":
+				client.user.setActivity(activity, { type: 'WATCHING' });
+				break;
+			case "playing":
+				client.user.setActivity(activity, { type: 'PLAYING' });
+				break;
+			case "listening":
+				client.user.setActivity(activity, { type: 'LISTENING' });
+				break;
+			default:
+				return msg.channel.send('watching, playing or listening');
+		}
+		return msg.channel.send(`Activity set to ${type} ${activity}`);
+	}
+	
+	else if (command === "!userinfo") {
+		let embed = new Discord.RichEmbed();
+		embed.setAuthor(msg.author.username, msg.author.avatarURL);
+		embed.setDescription("This is the user's info!");
+		embed.setColor("#00FF00");
+		embed.addField("Full Username:", `${msg.author.username}#${msg.author.discriminator}`);
+		embed.addField("ID:", msg.author.id);
+		embed.addField("Account Created At:", msg.author.createdAt);
+		embed.setTimestamp(new Date());
+		embed.setFooter("© Computer Science Bot");
+		msg.channel.send(embed);
+	}
+	else if (command === "!say") {
+    	let sayMessage = args.join(" ");
+    	msg.delete(); 
+   		msg.channel.send(sayMessage);
 	}
 	return undefined;
 });
