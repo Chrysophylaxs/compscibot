@@ -22,7 +22,7 @@ client.on('reconnecting', () => console.log('Reconnecting...'));
 
 client.on('message', async msg => {
 	if (msg.author.bot) return undefined;
-	if (msg.channel.id == '494085792772128768' && msg.attachments.size == 0 && !msg.content.startsWith('https://youtu') && !msg.content.startsWith('https://cdn.discordapp.com/attachments/') && !msg.content.startsWith('http://i.4cdn.org/gif/') && !msg.content.startsWith('https://steamuserimages-a.akamaihd.net/')) {
+	if ((msg.channel.id == '494085792772128768' || msg.channel.id == '529683176541650949') && msg.attachments.size == 0 && !msg.content.startsWith('https://youtu') && !msg.content.startsWith('https://cdn.discordapp.com/attachments/') && !msg.content.startsWith('http://i.4cdn.org/gif/') && !msg.content.startsWith('https://steamuserimages-a.akamaihd.net/')) {
 		console.log(msg.content);
 		msg.delete();
 	}
