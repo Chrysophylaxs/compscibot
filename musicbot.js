@@ -22,10 +22,6 @@ client.on('reconnecting', () => console.log('Reconnecting...'));
 
 client.on('message', async msg => {
 	if (msg.author.bot) return undefined;
-	if ((msg.channel.id == '494085792772128768') && msg.attachments.size == 0 && !msg.content.startsWith('https://youtu') && !msg.content.startsWith('https://cdn.discordapp.com/attachments/') && !msg.content.startsWith('http://i.4cdn.org/gif/') && !msg.content.startsWith('https://steamuserimages-a.akamaihd.net/')) {
-		console.log(msg.content);
-		msg.delete();
-	}
 	if (!msg.content.startsWith('!')) return undefined;
 	let args = msg.content.split(' ');
 	let command = args[0].toLowerCase();
@@ -70,7 +66,7 @@ client.on('message', async msg => {
 				voiceChannel: voiceChannel,
 				connection: null,
 				songs: [],
-				volume: 2,
+				volume: 5,
 				playing: true,
 				repeat: "off"
 			};
